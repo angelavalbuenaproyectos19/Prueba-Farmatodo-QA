@@ -28,10 +28,15 @@ class SummaryReporter {
       `Failed:   ${failed.length}`,
       `Skipped:  ${skipped}`,
     ];
+    lines.push('', 'Scenarios:');
+    this.results.forEach((r, i) => {
+      const mark = r.status === 'passed' ? 'PASS' : r.status === 'skipped' ? 'SKIP' : 'FAIL';
+      lines.push(`${String(i + 1).padStart(2, '0')}. [${mark}] ${r.title}`);
+    });
     if (failed.length) {
       lines.push('', 'Failures:');
       failed.forEach((f, i) => {
-        const msg = strip(f.error && (f.error.message || f.error.value)).split('\n').slice(0, 6).join('\n    ');
+        const msg = strip(f.error && (f.error.message || f.error.value)).split('\n').filter((l) => l.trim()).slice(0, 14).join('\n    ');
         lines.push(`${i + 1}. ${f.title}`, `    ${msg}`);
       });
     }
