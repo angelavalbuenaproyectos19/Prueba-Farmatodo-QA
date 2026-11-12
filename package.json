@@ -1,0 +1,13 @@
+{
+  "name": "prueba-audifarma-qa",
+  "version": "1.0.0",
+  "description": "Playwright (JavaScript) automation framework for wordcounter.net",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}
