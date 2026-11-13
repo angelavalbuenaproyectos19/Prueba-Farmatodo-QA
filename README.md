@@ -2,23 +2,23 @@
 
 Suite de pruebas automatizadas con **Playwright + JavaScript** para https://wordcounter.net/, aplicando el patrón **Page Object Model**, más un contador de frecuencia de palabras independiente.
 
-| Parte de la prueba | Dónde está |
-|--------------------|------------|
-| 1. Suite de pruebas automatizadas | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/` |
-| 2. Reporte de fallas y hallazgos | `docs/REPORTE_FALLAS.md` |
-| Escenarios definidos | `docs/ESCENARIOS.md` |
-| 4. Contador de frecuencia de palabras | `contador-frecuencia/` |
+| Parte de la prueba                    | Dónde está                                                  |
+| ------------------------------------- | ----------------------------------------------------------- |
+| 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/` |
+| 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                    |
+| Escenarios definidos                  | `docs/ESCENARIOS.md`                                        |
+| 4. Contador de frecuencia de palabras | `contador-frecuencia/`                                      |
 
 ---
 
 ## 1. Requisitos previos
 
-| Herramienta | Versión | Cómo verificar |
-|-------------|---------|----------------|
-| Node.js | 18 o superior (probado con 22) | `node -v` |
-| npm | 9 o superior | `npm -v` |
-| Git | cualquiera reciente | `git --version` |
-| Google Chrome (opcional) | solo para ejecutar con el Chrome instalado | — |
+| Herramienta              | Versión                                    | Cómo verificar  |
+| ------------------------ | ------------------------------------------ | --------------- |
+| Node.js                  | 18 o superior (probado con 22)             | `node -v`       |
+| npm                      | 9 o superior                               | `npm -v`        |
+| Git                      | cualquiera reciente                        | `git --version` |
+| Google Chrome (opcional) | solo para ejecutar con el Chrome instalado | —               |
 
 Se necesita conexión a internet: las pruebas navegan al sitio real https://wordcounter.net/.
 
@@ -97,7 +97,7 @@ Abre el reporte detallado de Playwright con pasos, capturas y trazas de las prue
 ## 4. Cómo interpretar los resultados
 
 - **APROBADO**: el sitio se comporta como se espera.
-- **FALLIDO**: el resultado del sitio difiere del esperado. Algunos escenarios **fallan a propósito** porque documentan defectos reales del sitio (están marcados con `DEFECTO` en el título y explicados en `docs/REPORTE_FALLAS.md`). Una ejecución con esas fallas es el resultado esperado, no un problema del proyecto.
+- **FALLIDO**: el resultado del sitio difiere del esperado. Algunos escenarios **fallan a propósito** porque documentan defectos reales del sitio (están marcados con `DEFECTO` en el título y con la etiqueta `@defecto-conocido`, y explicados en `docs/REPORTE_FALLAS.md`). Una ejecución con esas fallas es el resultado esperado, no un problema del proyecto.
 - El sitio actualiza el panel Keyword Density con un pequeño retraso; las pruebas esperan con `expect.poll` en lugar de pausas fijas.
 - Cada prueba abre un navegador limpio, así que parte siempre de la configuración por defecto del sitio.
 
@@ -117,6 +117,9 @@ tests/unit/                               pruebas unitarias del reporter
 reporters/format-summary.js               formato puro del resumen (ejecutados / aprobados / fallidos)
 reporters/summary-reporter.js             reporter de Playwright: recolecta resultados y escribe el archivo
 docs/                                     escenarios y reporte de fallas
+.github/workflows/ci.yml                  integración continua (GitHub Actions)
+eslint.config.js, .prettierrc.json        reglas de lint y formato
+.editorconfig                             estilo base del editor
 contador-frecuencia/                      contador de frecuencia de palabras (independiente)
 ```
 
@@ -154,14 +157,37 @@ toda: 1
 
 ## 7. Problemas frecuentes
 
-| Problema | Solución |
-|----------|----------|
-| `browserType.launch: Executable doesn't exist` | Falta el navegador: ejecuta `npx playwright install chromium`. |
-| Pruebas con timeout o fallas intermitentes | Revisa tu conexión: el sitio se consulta en vivo. Reintenta con `npx playwright test --workers=1`. |
-| `npm run test:headed` falla en Windows | Usa el comando de PowerShell de la sección 3. |
-| Quiero empezar de cero | Borra `node_modules`, `test-results` y `playwright-report`, y repite la instalación. |
+| Problema                                       | Solución                                                                                           |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `browserType.launch: Executable doesn't exist` | Falta el navegador: ejecuta `npx playwright install chromium`.                                     |
+| Pruebas con timeout o fallas intermitentes     | Revisa tu conexión: el sitio se consulta en vivo. Reintenta con `npx playwright test --workers=1`. |
+| `npm run test:headed` falla en Windows         | Usa el comando de PowerShell de la sección 3.                                                      |
+| Quiero empezar de cero                         | Borra `node_modules`, `test-results` y `playwright-report`, y repite la instalación.               |
 
-## 8. Cómo extender el proyecto
+## 8. Calidad de código
+
+```bash
+npm run lint            # revisa el código con ESLint (incluye reglas de buenas prácticas de Playwright)
+npm run lint:fix        # corrige automáticamente lo que se pueda
+npm run format:check    # verifica el formato con Prettier
+npm run format          # aplica el formato
+```
+
+Antes de subir cambios, ejecuta `npm run lint`, `npm run format:check` y `npm run test:unit`.
+
+### Integración continua (GitHub Actions)
+
+El flujo `.github/workflows/ci.yml` se ejecuta en cada push y pull request a `main`:
+
+| Job                  | Qué hace                                                                                        | ¿Bloquea?        |
+| -------------------- | ----------------------------------------------------------------------------------------------- | ---------------- |
+| `calidad`            | lint, formato y pruebas unitarias (reporter y contador)                                         | Sí               |
+| `e2e`                | pruebas end to end sin los escenarios de defectos conocidos (`--grep-invert @defecto-conocido`) | Sí               |
+| `defectos-conocidos` | solo los escenarios etiquetados `@defecto-conocido`, que fallan a propósito                     | No (informativo) |
+
+El resumen y el reporte HTML se guardan como artefactos de cada ejecución.
+
+## 9. Cómo extender el proyecto
 
 - **Nueva métrica del panel de contadores:** agrega una entrada (nombre -> selector) en `METRIC_SELECTORS` de `pages/components/StatsPanel.js`; las pruebas ya la leen con `app.stats.value('nombre')`.
 - **Nueva opción de Keyword Density:** agrega una entrada (nombre -> acción) en `keywordDensityOptions` de `pages/components/OptionsPanel.js` y úsala en los datos con `options: { nombre: valor }`.
