@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "test:headed": "PW_CHANNEL=chrome playwright test --headed --workers=2"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0"

@@ -1,7 +1,7 @@
 /**
- * Word frequency analysis.
- * Words are runs of non-whitespace characters, lowercased.
- * Characters include spaces but exclude line breaks.
+ * Análisis de frecuencia de palabras.
+ * Una palabra es una secuencia de caracteres sin espacios, en minúsculas.
+ * Los caracteres incluyen espacios pero excluyen los saltos de línea.
  */
 function analyze(text) {
   const characters = text.replace(/[\r\n]/g, '').length;
@@ -13,7 +13,7 @@ function analyze(text) {
     const w = token.toLowerCase();
     counts.set(w, (counts.get(w) || 0) + 1);
   }
-  // Count desc, then alphabetical on ties.
+  // Frecuencia descendente; en caso de empate, orden alfabético.
   const frequencies = [...counts.entries()].sort(
     (a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
   );

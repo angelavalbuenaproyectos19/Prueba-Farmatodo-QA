@@ -1,75 +1,76 @@
-// Well-defined scenarios. Expected values are fixed (calculated by hand, independent from the site).
-// Precondition for all: wordcounter.net open with default configuration and an empty text box.
+// Escenarios bien definidos. Los valores esperados son fijos (calculados a mano, independientes del sitio).
+// Precondición de todos: wordcounter.net abierto con la configuración por defecto y el cuadro de texto vacío.
 const SAMPLE =
   'farmatodo farmatodo farmatodo farmatodo farmatodo cuida cuida tu salud\nfarmatodo cuida toda tu salud';
-const LONG = 'gato '.repeat(500).trim(); // 500 words, 500*4 + 499 spaces = 2499 characters
+const LONG = 'gato '.repeat(500).trim(); // 500 palabras, 500*4 + 499 espacios = 2499 caracteres
 
-// Area 1 - Word count. Step: type `text`. Expected: Words counter equals `expected`.
+// Área 1 - Conteo de palabras. Paso: escribir `text`. Esperado: el contador Words es igual a `expected`.
 const words = [
-  { id: 'WC-01', title: 'challenge sample has 14 words', text: SAMPLE, expected: 14 },
-  { id: 'WC-02', title: 'empty text has 0 words', text: '', expected: 0 },
-  { id: 'WC-03', title: 'a single word counts as 1', text: 'farmatodo', expected: 1 },
-  { id: 'WC-04', title: 'multiple spaces do not create extra words', text: 'hola   mundo   hola', expected: 3 },
-  { id: 'WC-05', title: 'line breaks separate words', text: 'uno\ndos\ntres', expected: 3 },
-  { id: 'WC-06', title: 'punctuation does not create extra words', text: 'hola, mundo. hola!', expected: 3 },
-  { id: 'WC-07', title: 'a hyphenated word counts as 1', text: 'bien-estar bien-estar salud', expected: 3 },
-  { id: 'WC-08', title: 'numbers count as words', text: '123 456 123', expected: 3 },
-  { id: 'WC-09', title: 'leading and trailing spaces are ignored', text: '  hola  ', expected: 1 },
-  { id: 'WC-10', title: 'accented and special letters', text: 'salud ñandú ñandú canción', expected: 4 },
-  { id: 'WC-11', title: 'tabs separate words', text: 'hola\tmundo', expected: 2 },
-  { id: 'WC-12', title: 'long text of 500 words', text: LONG, expected: 500 },
+  { id: 'WC-01', title: 'el texto de ejemplo del enunciado tiene 14 palabras', text: SAMPLE, expected: 14 },
+  { id: 'WC-02', title: 'texto vacío tiene 0 palabras', text: '', expected: 0 },
+  { id: 'WC-03', title: 'una sola palabra cuenta como 1', text: 'farmatodo', expected: 1 },
+  { id: 'WC-04', title: 'varios espacios no crean palabras extra', text: 'hola   mundo   hola', expected: 3 },
+  { id: 'WC-05', title: 'los saltos de línea separan palabras', text: 'uno\ndos\ntres', expected: 3 },
+  { id: 'WC-06', title: 'la puntuación no crea palabras extra', text: 'hola, mundo. hola!', expected: 3 },
+  { id: 'WC-07', title: 'una palabra con guion cuenta como 1', text: 'bien-estar bien-estar salud', expected: 3 },
+  { id: 'WC-08', title: 'los números cuentan como palabras', text: '123 456 123', expected: 3 },
+  { id: 'WC-09', title: 'los espacios al inicio y al final se ignoran', text: '  hola  ', expected: 1 },
+  { id: 'WC-10', title: 'letras con tilde y especiales', text: 'salud ñandú ñandú canción', expected: 4 },
+  { id: 'WC-11', title: 'los tabuladores separan palabras', text: 'hola\tmundo', expected: 2 },
+  { id: 'WC-12', title: 'texto largo de 500 palabras', text: LONG, expected: 500 },
 ];
 
-// Area 2 - Character count. Rule: spaces and tabs are counted, line breaks are not.
+// Área 2 - Conteo de caracteres. Regla: se cuentan espacios y tabuladores, no los saltos de línea.
 const characters = [
-  { id: 'CC-01', title: 'challenge sample has 99 characters', text: SAMPLE, expected: 99 },
-  { id: 'CC-02', title: 'empty text has 0 characters', text: '', expected: 0 },
-  { id: 'CC-03', title: 'spaces are counted', text: 'a b', expected: 3 },
-  { id: 'CC-04', title: 'line breaks are not counted', text: 'uno\ndos', expected: 6 },
-  { id: 'CC-05', title: 'multiple spaces are all counted', text: 'hola   mundo   hola', expected: 19 },
-  { id: 'CC-06', title: 'punctuation is counted', text: 'hola, mundo. hola!', expected: 18 },
-  { id: 'CC-07', title: 'accented letters count as 1 character each', text: 'salud ñandú ñandú canción', expected: 25 },
-  { id: 'CC-08', title: 'leading and trailing spaces are counted', text: '  hola  ', expected: 8 },
-  { id: 'CC-09', title: 'a trailing line break is not counted', text: 'hola\n', expected: 4 },
-  { id: 'CC-10', title: 'a tab is counted as 1 character', text: 'hola\tmundo', expected: 10 },
-  { id: 'CC-11', title: 'long text of 2499 characters (thousands separator)', text: LONG, expected: 2499 },
+  { id: 'CC-01', title: 'el texto de ejemplo del enunciado tiene 99 caracteres', text: SAMPLE, expected: 99 },
+  { id: 'CC-02', title: 'texto vacío tiene 0 caracteres', text: '', expected: 0 },
+  { id: 'CC-03', title: 'los espacios se cuentan', text: 'a b', expected: 3 },
+  { id: 'CC-04', title: 'los saltos de línea no se cuentan', text: 'uno\ndos', expected: 6 },
+  { id: 'CC-05', title: 'todos los espacios múltiples se cuentan', text: 'hola   mundo   hola', expected: 19 },
+  { id: 'CC-06', title: 'la puntuación se cuenta', text: 'hola, mundo. hola!', expected: 18 },
+  { id: 'CC-07', title: 'cada letra con tilde cuenta como 1 carácter', text: 'salud ñandú ñandú canción', expected: 25 },
+  { id: 'CC-08', title: 'los espacios al inicio y al final se cuentan', text: '  hola  ', expected: 8 },
+  { id: 'CC-09', title: 'un salto de línea final no se cuenta', text: 'hola\n', expected: 4 },
+  { id: 'CC-10', title: 'un tabulador cuenta como 1 carácter', text: 'hola\tmundo', expected: 10 },
+  { id: 'CC-11', title: 'texto largo de 2499 caracteres (separador de miles)', text: LONG, expected: 2499 },
 ];
 
-// Area 3 - Keyword Density top 3. `topCounts`: expected counts in order; `keywords`: true count per word.
-// Tie order on the site is not alphabetical, so order is only asserted on counts (see REPORTE_FALLAS OPP-01).
+// Área 3 - Top 3 de Keyword Density. `topCounts`: conteos esperados en orden; `keywords`: conteo real por palabra.
+// El orden de los empates en el sitio no es alfabético, por eso solo se valida el orden de los conteos (ver REPORTE_FALLAS OPP-01).
 const keywords = [
-  { id: 'KD-01', title: 'challenge sample: farmatodo 6, cuida 3, then a 2-count word', text: SAMPLE,
+  { id: 'KD-01', title: 'ejemplo del enunciado: farmatodo 6, cuida 3, luego una palabra con 2', text: SAMPLE,
     topCounts: [6, 3, 2], keywords: { farmatodo: 6, cuida: 3, tu: 2, salud: 2, toda: 1 } },
-  { id: 'KD-02', title: 'no repetition: every word appears once', text: 'uno dos tres cuatro',
+  { id: 'KD-02', title: 'sin repetición: cada palabra aparece una vez', text: 'uno dos tres cuatro',
     topCounts: [1, 1, 1], keywords: { uno: 1, dos: 1, tres: 1, cuatro: 1 } },
-  { id: 'KD-03', title: 'words are case insensitive', text: 'Perro perro PERRO gato gato mar',
+  { id: 'KD-03', title: 'las palabras no distinguen mayúsculas de minúsculas', text: 'Perro perro PERRO gato gato mar',
     topCounts: [3, 2, 1], keywords: { perro: 3, gato: 2, mar: 1 } },
-  { id: 'KD-04', title: 'fewer than 3 distinct words lists only those', text: 'hola mundo hola',
+  { id: 'KD-04', title: 'con menos de 3 palabras distintas se listan solo esas', text: 'hola mundo hola',
     topCounts: [2, 1], keywords: { hola: 2, mundo: 1 } },
-  { id: 'KD-05', title: 'KNOWN DEFECT BUG-02: "luna" must appear with its count', text: 'sol sol sol luna luna mar',
-    topCounts: [3, 2, 1], keywords: { sol: 3, luna: 2, mar: 1 } },
-  { id: 'KD-06', title: 'punctuation is not part of the word', text: 'hola, mundo. hola!',
+  // La configuración por defecto excluye las "palabras comunes" (y los dígitos) de Keyword Density, ver OPP-03.
+  { id: 'KD-05', title: 'configuración por defecto: la palabra común "luna" se excluye de la lista', text: 'sol sol sol luna luna mar',
+    topCounts: [3, 1], keywords: { sol: 3, mar: 1 } },
+  { id: 'KD-06', title: 'la puntuación no forma parte de la palabra', text: 'hola, mundo. hola!',
     topCounts: [2, 1], keywords: { hola: 2, mundo: 1 } },
-  { id: 'KD-07', title: 'hyphenated words are kept as one keyword', text: 'bien-estar bien-estar salud',
+  { id: 'KD-07', title: 'las palabras con guion se mantienen como una sola keyword', text: 'bien-estar bien-estar salud',
     topCounts: [2, 1], keywords: { 'bien-estar': 2, salud: 1 } },
-  { id: 'KD-08', title: 'accented words are counted', text: 'salud ñandú ñandú canción',
+  { id: 'KD-08', title: 'las palabras con tilde se cuentan', text: 'salud ñandú ñandú canción',
     topCounts: [2, 1, 1], keywords: { 'ñandú': 2, salud: 1, 'canción': 1 } },
-  { id: 'KD-09', title: 'only the top 3 of 4 distinct words are listed', text: 'gato gato gato perro perro casa mesa',
+  { id: 'KD-09', title: 'solo se listan las 3 primeras de 4 palabras distintas', text: 'gato gato gato perro perro casa mesa',
     topCounts: [3, 2, 1], keywords: { gato: 3, perro: 2, casa: 1, mesa: 1 } },
-  { id: 'KD-10', title: 'long text: one keyword at 500', text: LONG,
+  { id: 'KD-10', title: 'texto largo: una keyword con 500', text: LONG,
     topCounts: [500], keywords: { gato: 500 } },
-  // Known site defect BUG-03 (docs/REPORTE_FALLAS.md): numbers are counted as words but not as keywords.
-  { id: 'KD-11', title: 'KNOWN DEFECT BUG-03: numbers must appear as keywords', text: '123 456 123',
-    topCounts: [2, 1], keywords: { '123': 2, '456': 1 } },
+  // Los números cuentan como palabras pero nunca se listan como keywords, ver OPP-03.
+  { id: 'KD-11', title: 'los números no se listan como keywords', text: 'hola 123 123 456 hola',
+    topCounts: [2], keywords: { hola: 2 } },
 ];
 
-// Area 4 - Keyword Density percentages (percent of total words, rounded).
+// Área 4 - Porcentajes de Keyword Density (porcentaje sobre el total de palabras, redondeado).
 const percentages = [
-  { id: 'KP-01', title: 'challenge sample: 6/14 = 43%, 3/14 = 21%', text: SAMPLE,
+  { id: 'KP-01', title: 'ejemplo del enunciado: 6/14 = 43%, 3/14 = 21%', text: SAMPLE,
     expected: [{ word: 'farmatodo', percent: 43 }, { word: 'cuida', percent: 21 }] },
-  { id: 'KP-02', title: 'two words, 2/3 = 67% and 1/3 = 33%', text: 'hola mundo hola',
+  { id: 'KP-02', title: 'dos palabras, 2/3 = 67% y 1/3 = 33%', text: 'hola mundo hola',
     expected: [{ word: 'hola', percent: 67 }, { word: 'mundo', percent: 33 }] },
-  { id: 'KP-03', title: 'a single repeated word is 100%', text: 'gato gato gato',
+  { id: 'KP-03', title: 'una sola palabra repetida es 100%', text: 'gato gato gato',
     expected: [{ word: 'gato', percent: 100 }] },
 ];
 

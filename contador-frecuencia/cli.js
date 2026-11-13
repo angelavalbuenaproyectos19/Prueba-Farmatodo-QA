@@ -4,7 +4,7 @@ const { analyze, format } = require('./wordFrequency');
 
 const file = process.argv[2];
 if (!file) {
-  console.error('Usage: node cli.js <text-file>');
+  console.error('Uso: node cli.js <archivo-de-texto>');
   process.exit(1);
 }
 console.log(format(analyze(fs.readFileSync(file, 'utf8'))));

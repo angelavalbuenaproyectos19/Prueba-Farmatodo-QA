@@ -1,7 +1,7 @@
 const { test, expect } = require('../../fixtures');
 const { words, characters, keywords, percentages } = require('../../test-data/scenarios');
 
-test.describe('Word count', () => {
+test.describe('Conteo de palabras', () => {
   for (const s of words) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       if (s.text) await app.enterText(s.text);
@@ -10,7 +10,7 @@ test.describe('Word count', () => {
   }
 });
 
-test.describe('Character count', () => {
+test.describe('Conteo de caracteres', () => {
   for (const s of characters) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       if (s.text) await app.enterText(s.text);
@@ -19,19 +19,19 @@ test.describe('Character count', () => {
   }
 });
 
-test.describe('Keyword density (top 3)', () => {
+test.describe('Keyword Density (top 3)', () => {
   for (const s of keywords) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       await app.enterText(s.text);
-      await expect.poll(() => app.keywords.topCounts(3), { message: 'top-3 counts' }).toEqual(s.topCounts);
+      await expect.poll(() => app.keywords.topCounts(3), { message: 'conteos del top 3' }).toEqual(s.topCounts);
       for (const { word, count } of await app.keywords.top(3)) {
-        expect(s.keywords[word], `unexpected keyword "${word}"`).toBe(count);
+        expect(s.keywords[word], `keyword inesperada "${word}"`).toBe(count);
       }
     });
   }
 });
 
-test.describe('Keyword density percentages', () => {
+test.describe('Porcentajes de Keyword Density', () => {
   for (const s of percentages) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       await app.enterText(s.text);
@@ -42,8 +42,8 @@ test.describe('Keyword density percentages', () => {
   }
 });
 
-test.describe('Live updates', () => {
-  test('LU-01 clearing the text resets counters and keywords', async ({ wordCounterPage: app }) => {
+test.describe('Actualizaciones en vivo', () => {
+  test('LU-01 borrar el texto reinicia contadores y keywords', async ({ wordCounterPage: app }) => {
     await app.enterText('hola mundo hola');
     await expect.poll(() => app.stats.words()).toBe(3);
     await app.clear();
@@ -52,13 +52,13 @@ test.describe('Live updates', () => {
     await expect.poll(() => app.keywords.isEmpty()).toBe(true);
   });
 
-  test('LU-02 typing key by key updates counters', async ({ wordCounterPage: app }) => {
+  test('LU-02 escribir tecla por tecla actualiza los contadores', async ({ wordCounterPage: app }) => {
     await app.appendText('hola mundo');
     await expect.poll(() => app.stats.words()).toBe(2);
     await expect.poll(() => app.stats.characters()).toBe(10);
   });
 
-  test('LU-03 appending text updates counters and keywords', async ({ wordCounterPage: app }) => {
+  test('LU-03 agregar texto actualiza contadores y keywords', async ({ wordCounterPage: app }) => {
     await app.enterText('hola mundo');
     await expect.poll(() => app.stats.words()).toBe(2);
     await app.appendText(' hola');

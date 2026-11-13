@@ -15,6 +15,7 @@ module.exports = defineConfig({
     baseURL: 'https://wordcounter.net',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    channel: process.env.PW_CHANNEL || undefined, // ej. PW_CHANNEL=chrome para usar el Google Chrome instalado
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
 });

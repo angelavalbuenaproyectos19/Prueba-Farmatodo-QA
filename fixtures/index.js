@@ -1,7 +1,7 @@
 const base = require('@playwright/test');
 const { WordCounterPage } = require('../pages/WordCounterPage');
 
-// Custom fixtures: tests receive ready-to-use page objects instead of building them.
+// Fixtures personalizados: las pruebas reciben los page objects listos para usar en lugar de construirlos.
 const test = base.test.extend({
   wordCounterPage: async ({ page }, use) => {
     const wordCounterPage = new WordCounterPage(page);

@@ -1,4 +1,4 @@
-// Custom reporter: total / passed / failed scenarios plus the error description of each failure.
+// Reporter personalizado: total de escenarios ejecutados, aprobados y fallidos, con la descripción del error de cada falla.
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -11,7 +11,7 @@ class SummaryReporter {
   }
 
   onTestEnd(test, result) {
-    // With retries, keep only the final attempt.
+    // Con reintentos, se conserva solo el último intento.
     const entry = { title: test.titlePath().slice(1).join(' > '), status: result.status, error: result.error };
     const i = this.results.findIndex((r) => r.title === entry.title);
     if (i >= 0) this.results[i] = entry; else this.results.push(entry);
@@ -22,19 +22,19 @@ class SummaryReporter {
     const failed = this.results.filter((r) => ['failed', 'timedOut', 'interrupted'].includes(r.status));
     const skipped = this.results.length - passed - failed.length;
     const lines = [
-      '=== TEST SUMMARY ===',
-      `Executed: ${this.results.length}`,
-      `Passed:   ${passed}`,
-      `Failed:   ${failed.length}`,
-      `Skipped:  ${skipped}`,
+      '=== RESUMEN DE PRUEBAS ===',
+      `Ejecutados: ${this.results.length}`,
+      `Aprobados:  ${passed}`,
+      `Fallidos:   ${failed.length}`,
+      `Omitidos:   ${skipped}`,
     ];
-    lines.push('', 'Scenarios:');
+    lines.push('', 'Escenarios:');
     this.results.forEach((r, i) => {
-      const mark = r.status === 'passed' ? 'PASS' : r.status === 'skipped' ? 'SKIP' : 'FAIL';
+      const mark = r.status === 'passed' ? 'APROBADO' : r.status === 'skipped' ? 'OMITIDO' : 'FALLIDO';
       lines.push(`${String(i + 1).padStart(2, '0')}. [${mark}] ${r.title}`);
     });
     if (failed.length) {
-      lines.push('', 'Failures:');
+      lines.push('', 'Fallas:');
       failed.forEach((f, i) => {
         const msg = strip(f.error && (f.error.message || f.error.value)).split('\n').filter((l) => l.trim()).slice(0, 14).join('\n    ');
         lines.push(`${i + 1}. ${f.title}`, `    ${msg}`);

@@ -1,8 +1,9 @@
 const { BasePage } = require('./BasePage');
 const { StatsPanel } = require('./components/StatsPanel');
 const { KeywordDensityPanel } = require('./components/KeywordDensityPanel');
+const { OptionsPanel } = require('./components/OptionsPanel');
 
-// Page Object for https://wordcounter.net/ (default configuration, no settings changed).
+// Page Object de https://wordcounter.net/ (configuración por defecto, sin modificar ajustes del sitio).
 class WordCounterPage extends BasePage {
   /** @param {import('@playwright/test').Page} page */
   constructor(page) {
@@ -10,6 +11,7 @@ class WordCounterPage extends BasePage {
     this.textBox = page.locator('#box');
     this.stats = new StatsPanel(page);
     this.keywords = new KeywordDensityPanel(page);
+    this.options = new OptionsPanel(page);
   }
 
   async goto() {
@@ -22,7 +24,7 @@ class WordCounterPage extends BasePage {
     await this.textBox.fill(text);
   }
 
-  /** Types at the end of the current text, key by key (exercises live updates). */
+  /** Escribe al final del texto actual, tecla por tecla (prueba las actualizaciones en vivo). */
   async appendText(text) {
     await this.textBox.pressSequentially(text);
   }
