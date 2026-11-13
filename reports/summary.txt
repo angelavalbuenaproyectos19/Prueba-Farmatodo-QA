@@ -5,24 +5,24 @@ Failed:   1
 Skipped:  0
 
 Scenarios:
-01. [PASS] chromium > wordcounter.spec.js > wordcounter.net > word count - challenge sample
-02. [PASS] chromium > wordcounter.spec.js > wordcounter.net > character count - challenge sample
-03. [PASS] chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - challenge sample
-04. [PASS] chromium > wordcounter.spec.js > wordcounter.net > word count - single line, no repetition
-05. [PASS] chromium > wordcounter.spec.js > wordcounter.net > character count - single line, no repetition
-06. [PASS] chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - single line, no repetition
-07. [PASS] chromium > wordcounter.spec.js > wordcounter.net > word count - mixed case counts as the same word
-08. [PASS] chromium > wordcounter.spec.js > wordcounter.net > character count - mixed case counts as the same word
-09. [PASS] chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - mixed case counts as the same word
-10. [PASS] chromium > wordcounter.spec.js > wordcounter.net > word count - multiple spaces between words
-11. [PASS] chromium > wordcounter.spec.js > wordcounter.net > character count - multiple spaces between words
-12. [PASS] chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - multiple spaces between words
-13. [PASS] chromium > wordcounter.spec.js > wordcounter.net > word count - word "luna" (known defect BUG-02)
-14. [PASS] chromium > wordcounter.spec.js > wordcounter.net > character count - word "luna" (known defect BUG-02)
-15. [FAIL] chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - word "luna" (known defect BUG-02)
+01. [PASS] chromium > wordcounter.spec.js > Word count > WC-01 challenge sample has 14 words
+02. [PASS] chromium > wordcounter.spec.js > Word count > WC-02 empty text has 0 words
+03. [PASS] chromium > wordcounter.spec.js > Word count > WC-03 a single word counts as 1
+04. [PASS] chromium > wordcounter.spec.js > Word count > WC-04 multiple spaces do not create extra words
+05. [PASS] chromium > wordcounter.spec.js > Word count > WC-05 line breaks separate words
+06. [PASS] chromium > wordcounter.spec.js > Character count > CC-01 challenge sample has 99 characters
+07. [PASS] chromium > wordcounter.spec.js > Character count > CC-02 empty text has 0 characters
+08. [PASS] chromium > wordcounter.spec.js > Character count > CC-03 spaces are counted
+09. [PASS] chromium > wordcounter.spec.js > Character count > CC-04 line breaks are not counted
+10. [PASS] chromium > wordcounter.spec.js > Character count > CC-05 multiple spaces are all counted
+11. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-01 challenge sample: farmatodo 6, cuida 3, then a 2-count word
+12. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-02 no repetition: every word appears once
+13. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-03 words are case insensitive
+14. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-04 fewer than 3 distinct words lists only those
+15. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
 
 Failures:
-1. chromium > wordcounter.spec.js > wordcounter.net > top 3 keyword density - word "luna" (known defect BUG-02)
+1. chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
     Error: top-3 counts
     top-3 counts
     expect(received).toEqual(expected) // deep equality

@@ -18,9 +18,20 @@ npm run report      # opens the HTML report
 ```
 The summary (executed / passed / failed + error description) is printed at the end and saved to `reports/summary.txt`.
 
-Structure: Page Object (`pages/WordCounterPage.js`), data-driven scenarios (`tests/e2e/wordcounter.spec.js`), custom reporter (`reporters/summary-reporter.js`). Expected values are fixed in the spec, independent from the site.
+Structure (Page Object Model):
+```
+pages/BasePage.js                    base class (page + navigation)
+pages/WordCounterPage.js             page object, composes the components below
+pages/components/StatsPanel.js       Words / Characters counters
+pages/components/KeywordDensityPanel.js  Keyword Density list
+fixtures/index.js                    Playwright fixtures injecting page objects
+test-data/scenarios.js               scenario data (IDs, inputs, expected values)
+tests/e2e/wordcounter.spec.js        specs: assertions only, no selectors
+reporters/summary-reporter.js        executed / passed / failed + error description
+```
+Scenarios are listed in `docs/ESCENARIOS.md`.
 
-One scenario (`word "luna" (known defect BUG-02)`) fails on purpose: it documents a real site defect.
+One scenario (`KD-05`, known defect BUG-02) fails on purpose: it documents a real site defect.
 
 ## Word frequency counter (part 4)
 ```bash
