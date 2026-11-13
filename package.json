@@ -1,5 +1,5 @@
 {
-  "name": "prueba-audifarma-qa",
+  "name": "farmatodo-qa",
   "version": "1.0.0",
   "description": "Playwright (JavaScript) automation framework for wordcounter.net",
   "private": true,
