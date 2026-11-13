@@ -7,7 +7,7 @@ Suite de pruebas automatizadas con **Playwright + JavaScript** para https://word
 | 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/`                                            |
 | 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                                                               |
 | Escenarios definidos                  | `docs/ESCENARIOS.md`                                                                                   |
-| 4. Contador de frecuencia de palabras | [Repositorio independiente](https://github.com/angelavalbuenaproyectos19/contador-frecuencia-palabras) |
+| 4. Contador de frecuencia de palabras | [Repositorio independiente](https://github.com/angelavalbuenaproyectos19/Prueba-Farmatodo-Contador) |
 
 ---
 
@@ -124,7 +124,7 @@ eslint.config.js, .prettierrc.json        reglas de lint y formato
 
 ## 6. Contador de frecuencia de palabras
 
-El contador (punto 4) está en un repositorio independiente, con su propio README, pruebas unitarias y de integración y CI: https://github.com/angelavalbuenaproyectos19/contador-frecuencia-palabras
+El contador (punto 4) está en un repositorio independiente, con su propio README, pruebas unitarias y de integración y CI: https://github.com/angelavalbuenaproyectos19/Prueba-Farmatodo-Contador
 
 ## 7. Problemas frecuentes
 
