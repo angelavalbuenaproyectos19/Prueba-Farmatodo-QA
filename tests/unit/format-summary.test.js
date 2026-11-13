@@ -15,7 +15,10 @@ test('cuenta ejecutados, aprobados, fallidos y omitidos', () => {
 });
 
 test('lista todos los escenarios con su estado', () => {
-  const texto = formatSummary([{ title: 'a', status: 'passed' }, { title: 'b', status: 'timedOut' }]);
+  const texto = formatSummary([
+    { title: 'a', status: 'passed' },
+    { title: 'b', status: 'timedOut' },
+  ]);
   assert.match(texto, /01\. \[APROBADO\] a/);
   assert.match(texto, /02\. \[FALLIDO\] b/);
 });
@@ -24,7 +27,7 @@ test('incluye la descripción del error sin códigos de color', () => {
   const texto = formatSummary([{ title: 'b', status: 'failed', error: { message: '\u001b[31mfallo rojo\u001b[0m' } }]);
   assert.match(texto, /Fallas:/);
   assert.match(texto, /fallo rojo/);
-  assert.doesNotMatch(texto, /\u001b/);
+  assert.ok(!texto.includes('\u001b'));
 });
 
 test('sin fallas no imprime la sección Fallas', () => {

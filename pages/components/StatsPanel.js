@@ -22,7 +22,8 @@ class StatsPanel {
   /** @param {keyof typeof METRIC_SELECTORS} name */
   locator(name) {
     const locator = this.locators[name];
-    if (!locator) throw new Error(`Métrica desconocida "${name}". Disponibles: ${Object.keys(this.locators).join(', ')}`);
+    if (!locator)
+      throw new Error(`Métrica desconocida "${name}". Disponibles: ${Object.keys(this.locators).join(', ')}`);
     return locator;
   }
 

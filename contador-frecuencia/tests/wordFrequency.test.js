@@ -6,13 +6,19 @@ const { analyze, format } = require('../wordFrequency');
 
 test('coincide con la salida exacta del enunciado', () => {
   const text = fs.readFileSync(path.join(__dirname, '../data/sample.txt'), 'utf8');
-  const expected = ['14 words', '99 characters', '', 'farmatodo: 6', 'cuida: 3', 'salud: 2', 'tu: 2', 'toda: 1'].join('\n');
+  const expected = ['14 words', '99 characters', '', 'farmatodo: 6', 'cuida: 3', 'salud: 2', 'tu: 2', 'toda: 1'].join(
+    '\n'
+  );
   assert.equal(format(analyze(text)), expected);
 });
 
 test('los empates se ordenan alfabéticamente', () => {
   const { frequencies } = analyze('b a c a b c');
-  assert.deepEqual(frequencies, [['a', 2], ['b', 2], ['c', 2]]);
+  assert.deepEqual(frequencies, [
+    ['a', 2],
+    ['b', 2],
+    ['c', 2],
+  ]);
 });
 
 test('los saltos de línea no cuentan como caracteres, los espacios sí', () => {

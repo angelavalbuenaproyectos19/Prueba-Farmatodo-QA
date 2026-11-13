@@ -14,9 +14,7 @@ function analyze(text) {
     counts.set(w, (counts.get(w) || 0) + 1);
   }
   // Frecuencia descendente; en caso de empate, orden alfabético.
-  const frequencies = [...counts.entries()].sort(
-    (a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
-  );
+  const frequencies = [...counts.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
   return { words, characters, frequencies };
 }
 

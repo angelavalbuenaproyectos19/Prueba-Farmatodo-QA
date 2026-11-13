@@ -1,7 +1,9 @@
 // Formato puro del resumen de pruebas (sin lectura ni escritura): fácil de probar y de reutilizar.
+const { stripVTControlCharacters } = require('node:util');
+
 const FALLAS = ['failed', 'timedOut', 'interrupted'];
 
-const quitarColores = (texto) => String(texto || '').replace(/\u001b\[[0-9;]*m/g, '');
+const quitarColores = (texto) => stripVTControlCharacters(String(texto || ''));
 
 function estadoLegible(status) {
   if (status === 'passed') return 'APROBADO';

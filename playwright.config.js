@@ -5,12 +5,9 @@ module.exports = defineConfig({
   testDir: './tests/e2e',
   timeout: 30_000,
   expect: { timeout: 10_000 },
-  retries: 1,
-  reporter: [
-    ['list'],
-    ['html', { open: 'never' }],
-    ['./reporters/summary-reporter.js', { outputDir: 'reports' }],
-  ],
+  forbidOnly: !!process.env.CI, // en CI falla si queda un test.only olvidado
+  retries: process.env.CI ? 2 : 1,
+  reporter: [['list'], ['html', { open: 'never' }], ['./reporters/summary-reporter.js', { outputDir: 'reports' }]],
   use: {
     baseURL: 'https://wordcounter.net',
     trace: 'retain-on-failure',

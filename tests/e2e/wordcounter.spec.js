@@ -4,7 +4,7 @@ const { words, characters, keywords, percentages } = require('../../test-data/sc
 test.describe('Conteo de palabras', () => {
   for (const s of words) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
-      if (s.text) await app.enterText(s.text);
+      await app.enterText(s.text);
       await expect.poll(() => app.stats.value('words')).toBe(s.expected);
     });
   }
@@ -13,7 +13,7 @@ test.describe('Conteo de palabras', () => {
 test.describe('Conteo de caracteres', () => {
   for (const s of characters) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
-      if (s.text) await app.enterText(s.text);
+      await app.enterText(s.text);
       await expect.poll(() => app.stats.value('characters')).toBe(s.expected);
     });
   }
