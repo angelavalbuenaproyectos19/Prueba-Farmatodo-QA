@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calidad:
+    name: Calidad (lint, formato y pruebas unitarias)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run test:unit
+      - name: Pruebas unitarias del contador de frecuencia
+        run: npm test
+        working-directory: contador-frecuencia
+
+  e2e:
+    name: Pruebas end to end (sin escenarios de defectos conocidos)
+    runs-on: ubuntu-latest
+    needs: calidad
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --grep-invert @defecto-conocido --workers=2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-e2e
+          path: |
+            playwright-report/
+            reports/summary.txt
+          retention-days: 14
+
+  defectos-conocidos:
+    name: Escenarios de defectos conocidos (informativo)
+    runs-on: ubuntu-latest
+    needs: calidad
+    # Estos escenarios fallan a propósito: documentan defectos reales del sitio y no bloquean el CI.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --grep @defecto-conocido --workers=2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-defectos
+          path: reports/summary.txt
+          retention-days: 14
