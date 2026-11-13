@@ -1,4 +1,4 @@
-# Farmatodo - Automatización QA
+# Prueba Farmatodo - Automatización QA
 
 Suite de pruebas automatizadas con **Playwright + JavaScript** para https://wordcounter.net/, aplicando el patrón **Page Object Model**. El contador de frecuencia de palabras vive en su propio repositorio.
 
@@ -26,10 +26,10 @@ Se necesita conexión a internet: las pruebas navegan al sitio real https://word
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/angelavalbuenaproyectos19/Farmatodo.git
+git clone https://github.com/angelavalbuenaproyectos19/Prueba-Farmatodo.git
 
 # 2. Entrar a la carpeta
-cd Farmatodo
+cd Prueba-Farmatodo
 
 # 3. Instalar las dependencias (Playwright)
 npm install
