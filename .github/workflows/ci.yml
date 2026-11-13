@@ -24,9 +24,6 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm run test:unit
-      - name: Pruebas unitarias del contador de frecuencia
-        run: npm test
-        working-directory: contador-frecuencia
 
   e2e:
     name: Pruebas end to end (sin escenarios de defectos conocidos)

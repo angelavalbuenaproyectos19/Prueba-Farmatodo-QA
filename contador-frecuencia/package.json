@@ -1,9 +1,0 @@
-{
-  "name": "contador-frecuencia",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node cli.js data/sample.txt",
-    "test": "node --test \"tests/*.test.js\""
-  }
-}

@@ -1,13 +1,13 @@
 # Prueba Audifarma - Automatización QA
 
-Suite de pruebas automatizadas con **Playwright + JavaScript** para https://wordcounter.net/, aplicando el patrón **Page Object Model**, más un contador de frecuencia de palabras independiente.
+Suite de pruebas automatizadas con **Playwright + JavaScript** para https://wordcounter.net/, aplicando el patrón **Page Object Model**. El contador de frecuencia de palabras vive en su propio repositorio.
 
-| Parte de la prueba                    | Dónde está                                                  |
-| ------------------------------------- | ----------------------------------------------------------- |
-| 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/` |
-| 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                    |
-| Escenarios definidos                  | `docs/ESCENARIOS.md`                                        |
-| 4. Contador de frecuencia de palabras | `contador-frecuencia/`                                      |
+| Parte de la prueba                    | Dónde está                                                                                             |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/`                                            |
+| 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                                                               |
+| Escenarios definidos                  | `docs/ESCENARIOS.md`                                                                                   |
+| 4. Contador de frecuencia de palabras | [Repositorio independiente](https://github.com/angelavalbuenaproyectos19/contador-frecuencia-palabras) |
 
 ---
 
@@ -120,40 +120,11 @@ docs/                                     escenarios y reporte de fallas
 .github/workflows/ci.yml                  integración continua (GitHub Actions)
 eslint.config.js, .prettierrc.json        reglas de lint y formato
 .editorconfig                             estilo base del editor
-contador-frecuencia/                      contador de frecuencia de palabras (independiente)
 ```
 
 ## 6. Contador de frecuencia de palabras
 
-Programa independiente, sin dependencias, que lee un archivo de texto y muestra palabras, caracteres (incluye espacios, sin saltos de línea) y el histograma ordenado por frecuencia descendente y, en empate, alfabéticamente.
-
-```bash
-cd contador-frecuencia
-
-# Ejecutar con el archivo de ejemplo del enunciado
-npm start
-
-# Ejecutar con tu propio archivo
-node cli.js ruta/a/tu-archivo.txt
-
-# Pruebas unitarias
-npm test
-```
-
-Salida esperada con `data/sample.txt`:
-
-```
-14 words
-99 characters
-
-farmatodo: 6
-cuida: 3
-salud: 2
-tu: 2
-toda: 1
-```
-
-**Complejidad:** O(n) en tiempo para recorrer y contar (n = cantidad de caracteres del texto), más O(k log k) para ordenar las k palabras distintas; espacio adicional O(k).
+El contador (punto 4) está en un repositorio independiente, con su propio README, pruebas unitarias y de integración y CI: https://github.com/angelavalbuenaproyectos19/contador-frecuencia-palabras
 
 ## 7. Problemas frecuentes
 
@@ -181,7 +152,7 @@ El flujo `.github/workflows/ci.yml` se ejecuta en cada push y pull request a `ma
 
 | Job                  | Qué hace                                                                                        | ¿Bloquea?        |
 | -------------------- | ----------------------------------------------------------------------------------------------- | ---------------- |
-| `calidad`            | lint, formato y pruebas unitarias (reporter y contador)                                         | Sí               |
+| `calidad`            | lint, formato y pruebas unitarias del reporter                                                  | Sí               |
 | `e2e`                | pruebas end to end sin los escenarios de defectos conocidos (`--grep-invert @defecto-conocido`) | Sí               |
 | `defectos-conocidos` | solo los escenarios etiquetados `@defecto-conocido`, que fallan a propósito                     | No (informativo) |
 

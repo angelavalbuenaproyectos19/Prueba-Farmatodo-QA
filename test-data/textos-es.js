@@ -1,5 +1,5 @@
 // Escenarios con textos reales en español (tildes, eñe, signos de apertura ¿ ¡, párrafos, mayúsculas).
-// Los valores esperados son fijos (calculados a mano / con el contador de referencia, independientes del sitio).
+// Los valores esperados son fijos (calculados a mano y verificados con un contador independiente, sin depender del sitio).
 // Precondición de todos: wordcounter.net abierto con la configuración por defecto y el cuadro de texto vacío.
 const FRASE =
   'La salud de tu familia es lo más importante. ¿Cuidas tu salud? ¡Farmatodo cuida tu salud y la de tu familia!';
