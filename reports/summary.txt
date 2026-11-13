@@ -1,65 +1,114 @@
-=== TEST SUMMARY ===
-Executed: 40
-Passed:   38
-Failed:   2
-Skipped:  0
+=== RESUMEN DE PRUEBAS ===
+Ejecutados: 78
+Aprobados:  76
+Fallidos:   2
+Omitidos:   0
 
-Scenarios:
-01. [PASS] chromium > wordcounter.spec.js > Word count > WC-01 challenge sample has 14 words
-02. [PASS] chromium > wordcounter.spec.js > Word count > WC-02 empty text has 0 words
-03. [PASS] chromium > wordcounter.spec.js > Word count > WC-03 a single word counts as 1
-04. [PASS] chromium > wordcounter.spec.js > Word count > WC-04 multiple spaces do not create extra words
-05. [PASS] chromium > wordcounter.spec.js > Word count > WC-05 line breaks separate words
-06. [PASS] chromium > wordcounter.spec.js > Word count > WC-06 punctuation does not create extra words
-07. [PASS] chromium > wordcounter.spec.js > Word count > WC-07 a hyphenated word counts as 1
-08. [PASS] chromium > wordcounter.spec.js > Word count > WC-08 numbers count as words
-09. [PASS] chromium > wordcounter.spec.js > Word count > WC-09 leading and trailing spaces are ignored
-10. [PASS] chromium > wordcounter.spec.js > Word count > WC-10 accented and special letters
-11. [PASS] chromium > wordcounter.spec.js > Word count > WC-11 tabs separate words
-12. [PASS] chromium > wordcounter.spec.js > Word count > WC-12 long text of 500 words
-13. [PASS] chromium > wordcounter.spec.js > Character count > CC-01 challenge sample has 99 characters
-14. [PASS] chromium > wordcounter.spec.js > Character count > CC-02 empty text has 0 characters
-15. [PASS] chromium > wordcounter.spec.js > Character count > CC-03 spaces are counted
-16. [PASS] chromium > wordcounter.spec.js > Character count > CC-04 line breaks are not counted
-17. [PASS] chromium > wordcounter.spec.js > Character count > CC-05 multiple spaces are all counted
-18. [PASS] chromium > wordcounter.spec.js > Character count > CC-06 punctuation is counted
-19. [PASS] chromium > wordcounter.spec.js > Character count > CC-07 accented letters count as 1 character each
-20. [PASS] chromium > wordcounter.spec.js > Character count > CC-08 leading and trailing spaces are counted
-21. [PASS] chromium > wordcounter.spec.js > Character count > CC-09 a trailing line break is not counted
-22. [PASS] chromium > wordcounter.spec.js > Character count > CC-10 a tab is counted as 1 character
-23. [PASS] chromium > wordcounter.spec.js > Character count > CC-11 long text of 2499 characters (thousands separator)
-24. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-01 challenge sample: farmatodo 6, cuida 3, then a 2-count word
-25. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-02 no repetition: every word appears once
-26. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-03 words are case insensitive
-27. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-04 fewer than 3 distinct words lists only those
-28. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
-29. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-06 punctuation is not part of the word
-30. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-07 hyphenated words are kept as one keyword
-31. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-08 accented words are counted
-32. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-09 only the top 3 of 4 distinct words are listed
-33. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-10 long text: one keyword at 500
-34. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-11 KNOWN DEFECT BUG-03: numbers must appear as keywords
-35. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-01 challenge sample: 6/14 = 43%, 3/14 = 21%
-36. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-02 two words, 2/3 = 67% and 1/3 = 33%
-37. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-03 a single repeated word is 100%
-38. [PASS] chromium > wordcounter.spec.js > Live updates > LU-01 clearing the text resets counters and keywords
-39. [PASS] chromium > wordcounter.spec.js > Live updates > LU-02 typing key by key updates counters
-40. [PASS] chromium > wordcounter.spec.js > Live updates > LU-03 appending text updates counters and keywords
+Escenarios:
+01. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-01 palabras - frase con signos ¿? ¡! y tildes
+02. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-01 el texto de ejemplo del enunciado tiene 14 palabras
+03. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-02 texto vacío tiene 0 palabras
+04. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-01 incluir palabras comunes: "luna" aparece
+05. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-01 caracteres - frase con signos ¿? ¡! y tildes
+06. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-03 una sola palabra cuenta como 1
+07. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-02 cantidad = 2 lista solo 2 keywords
+08. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-02 palabras - dos párrafos separados por una línea en blanco
+09. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-03 cantidad = 1 lista solo la keyword principal
+10. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-04 varios espacios no crean palabras extra
+11. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-02 caracteres - dos párrafos separados por una línea en blanco
+12. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-05 los saltos de línea separan palabras
+13. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-03 palabras - eñe y tildes en una oración
+14. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-04 palabras consecutivas = 2 agrupa frases de dos palabras
+15. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-03 caracteres - eñe y tildes en una oración
+16. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-06 la puntuación no crea palabras extra
+17. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-05 palabras consecutivas = 3 agrupa frases de tres palabras
+18. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-04 palabras - la misma palabra en mayúsculas y minúsculas
+19. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-07 una palabra con guion cuenta como 1
+20. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-06 combinación: palabras comunes + cantidad 2
+21. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-04 caracteres - la misma palabra en mayúsculas y minúsculas
+22. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-08 los números cuentan como palabras
+23. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-07 combinación: palabras comunes + consecutivas 2
+24. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-05 palabras - palabras con tilde final
+25. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-09 los espacios al inicio y al final se ignoran
+26. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-08 combinación: consecutivas 2 + cantidad 1
+27. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-05 caracteres - palabras con tilde final
+28. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-10 letras con tilde y especiales
+29. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-09 combinación: palabras comunes + consecutivas 2 + cantidad 2
+30. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-06 palabras - signos de apertura no crean palabras extra
+31. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-11 los tabuladores separan palabras
+32. [APROBADO] chromium > espanol.spec.js > Textos en español > Conteos > ES-06 caracteres - signos de apertura no crean palabras extra
+33. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-10 cantidad inválida 0 se ignora y se muestra la lista completa
+34. [APROBADO] chromium > wordcounter.spec.js > Conteo de palabras > WC-12 texto largo de 500 palabras
+35. [APROBADO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-01 frase larga: tu 4, salud 3 y una palabra con 2
+36. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-11 cantidad inválida -1 se ignora y se muestra la lista completa
+37. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-01 el texto de ejemplo del enunciado tiene 99 caracteres
+38. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-02 texto vacío tiene 0 caracteres
+39. [APROBADO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-02 palabras con tilde se agrupan sin importar el orden
+40. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-03 los espacios se cuentan
+41. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-19 palabras consecutivas = 2 con tildes
+42. [APROBADO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-03 mayúsculas y minúsculas cuentan como la misma palabra
+43. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-04 los saltos de línea no se cuentan
+44. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-20 combinación: cantidad 2 con eñe
+45. [APROBADO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-04 la eñe se conserva en la keyword
+46. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-05 todos los espacios múltiples se cuentan
+47. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-16 desactivar el panel Keyword Density lo oculta
+48. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-06 la puntuación se cuenta
+49. [APROBADO] chromium > options.spec.js > Opciones > Keyword Density > OP-17 una opción se mantiene aplicada después de recargar la página
+50. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-07 cada letra con tilde cuenta como 1 carácter
+51. [FALLIDO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-05 DEFECTO BUG-01: ¡Farmatodo, ¿Farmatodo y Farmatodo son la misma keyword
+52. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-08 los espacios al inicio y al final se cuentan
+53. [APROBADO] chromium > options.spec.js > Opciones > Details > OP-12 Caracteres sin espacios = 36
+54. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-09 un salto de línea final no se cuenta
+55. [APROBADO] chromium > options.spec.js > Opciones > Details > OP-13 Palabras únicas = 6
+56. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-10 un tabulador cuenta como 1 carácter
+57. [APROBADO] chromium > options.spec.js > Opciones > Details > OP-14 Líneas = 2
+58. [APROBADO] chromium > wordcounter.spec.js > Conteo de caracteres > CC-11 texto largo de 2499 caracteres (separador de miles)
+59. [APROBADO] chromium > options.spec.js > Opciones > Details > OP-15 combinación: los tres contadores extra juntos mantienen intactos los contadores base
+60. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-01 ejemplo del enunciado: farmatodo 6, cuida 3, luego una palabra con 2
+61. [APROBADO] chromium > options.spec.js > Opciones > Details > OP-18 ocultar el contador Characters mantiene visible Words
+62. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-02 sin repetición: cada palabra aparece una vez
+63. [FALLIDO] chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-06 DEFECTO BUG-01: «hola» con comillas angulares es la misma keyword que hola
+64. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-03 las palabras no distinguen mayúsculas de minúsculas
+65. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-04 con menos de 3 palabras distintas se listan solo esas
+66. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-05 configuración por defecto: la palabra común "luna" se excluye de la lista
+67. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-06 la puntuación no forma parte de la palabra
+68. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-07 las palabras con guion se mantienen como una sola keyword
+69. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-08 las palabras con tilde se cuentan
+70. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-09 solo se listan las 3 primeras de 4 palabras distintas
+71. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-10 texto largo: una keyword con 500
+72. [APROBADO] chromium > wordcounter.spec.js > Keyword Density (top 3) > KD-11 los números no se listan como keywords
+73. [APROBADO] chromium > wordcounter.spec.js > Porcentajes de Keyword Density > KP-01 ejemplo del enunciado: 6/14 = 43%, 3/14 = 21%
+74. [APROBADO] chromium > wordcounter.spec.js > Porcentajes de Keyword Density > KP-02 dos palabras, 2/3 = 67% y 1/3 = 33%
+75. [APROBADO] chromium > wordcounter.spec.js > Porcentajes de Keyword Density > KP-03 una sola palabra repetida es 100%
+76. [APROBADO] chromium > wordcounter.spec.js > Actualizaciones en vivo > LU-01 borrar el texto reinicia contadores y keywords
+77. [APROBADO] chromium > wordcounter.spec.js > Actualizaciones en vivo > LU-02 escribir tecla por tecla actualiza los contadores
+78. [APROBADO] chromium > wordcounter.spec.js > Actualizaciones en vivo > LU-03 agregar texto actualiza contadores y keywords
 
-Failures:
-1. chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
-    Error: top-3 counts
-    top-3 counts
+Fallas:
+1. chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-05 DEFECTO BUG-01: ¡Farmatodo, ¿Farmatodo y Farmatodo son la misma keyword
+    Error: conteos del top 3
+    conteos del top 3
     expect(received).toEqual(expected) // deep equality
     - Expected  - 1
-    + Received  + 0
+    + Received  + 2
       Array [
         3,
-    -   2,
-        1,
+    -   3,
+    +   1,
+    +   1,
       ]
     Call Log:
     - Timeout 10000ms exceeded while waiting on the predicate
-2. chromium > wordcounter.spec.js > Keyword density (top 3) > KD-11 KNOWN DEFECT BUG-03: numbers must appear as keywords
-    Error: top-3 counts
-    Timeout 10000ms exceeded while waiting on the predicate
+2. chromium > espanol.spec.js > Textos en español > Keyword Density > ES-KD-06 DEFECTO BUG-01: «hola» con comillas angulares es la misma keyword que hola
+    Error: conteos del top 3
+    conteos del top 3
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 2
+      Array [
+    -   4,
+    +   3,
+    +   1,
+      ]
+    Call Log:
+    - Timeout 10000ms exceeded while waiting on the predicate
