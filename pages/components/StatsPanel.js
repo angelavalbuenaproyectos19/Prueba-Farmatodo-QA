@@ -6,12 +6,17 @@ class StatsPanel {
     this.characterCount = page.locator('#character_count');
   }
 
+  // The site formats thousands (e.g. "2,499"), so separators are stripped before parsing.
+  static parse(text) {
+    return Number(text.trim().replace(/,/g, ''));
+  }
+
   async words() {
-    return Number((await this.wordCount.innerText()).trim());
+    return StatsPanel.parse(await this.wordCount.innerText());
   }
 
   async characters() {
-    return Number((await this.characterCount.innerText()).trim());
+    return StatsPanel.parse(await this.characterCount.innerText());
   }
 }
 

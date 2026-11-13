@@ -1,7 +1,7 @@
 === TEST SUMMARY ===
-Executed: 15
-Passed:   14
-Failed:   1
+Executed: 40
+Passed:   38
+Failed:   2
 Skipped:  0
 
 Scenarios:
@@ -10,16 +10,41 @@ Scenarios:
 03. [PASS] chromium > wordcounter.spec.js > Word count > WC-03 a single word counts as 1
 04. [PASS] chromium > wordcounter.spec.js > Word count > WC-04 multiple spaces do not create extra words
 05. [PASS] chromium > wordcounter.spec.js > Word count > WC-05 line breaks separate words
-06. [PASS] chromium > wordcounter.spec.js > Character count > CC-01 challenge sample has 99 characters
-07. [PASS] chromium > wordcounter.spec.js > Character count > CC-02 empty text has 0 characters
-08. [PASS] chromium > wordcounter.spec.js > Character count > CC-03 spaces are counted
-09. [PASS] chromium > wordcounter.spec.js > Character count > CC-04 line breaks are not counted
-10. [PASS] chromium > wordcounter.spec.js > Character count > CC-05 multiple spaces are all counted
-11. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-01 challenge sample: farmatodo 6, cuida 3, then a 2-count word
-12. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-02 no repetition: every word appears once
-13. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-03 words are case insensitive
-14. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-04 fewer than 3 distinct words lists only those
-15. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
+06. [PASS] chromium > wordcounter.spec.js > Word count > WC-06 punctuation does not create extra words
+07. [PASS] chromium > wordcounter.spec.js > Word count > WC-07 a hyphenated word counts as 1
+08. [PASS] chromium > wordcounter.spec.js > Word count > WC-08 numbers count as words
+09. [PASS] chromium > wordcounter.spec.js > Word count > WC-09 leading and trailing spaces are ignored
+10. [PASS] chromium > wordcounter.spec.js > Word count > WC-10 accented and special letters
+11. [PASS] chromium > wordcounter.spec.js > Word count > WC-11 tabs separate words
+12. [PASS] chromium > wordcounter.spec.js > Word count > WC-12 long text of 500 words
+13. [PASS] chromium > wordcounter.spec.js > Character count > CC-01 challenge sample has 99 characters
+14. [PASS] chromium > wordcounter.spec.js > Character count > CC-02 empty text has 0 characters
+15. [PASS] chromium > wordcounter.spec.js > Character count > CC-03 spaces are counted
+16. [PASS] chromium > wordcounter.spec.js > Character count > CC-04 line breaks are not counted
+17. [PASS] chromium > wordcounter.spec.js > Character count > CC-05 multiple spaces are all counted
+18. [PASS] chromium > wordcounter.spec.js > Character count > CC-06 punctuation is counted
+19. [PASS] chromium > wordcounter.spec.js > Character count > CC-07 accented letters count as 1 character each
+20. [PASS] chromium > wordcounter.spec.js > Character count > CC-08 leading and trailing spaces are counted
+21. [PASS] chromium > wordcounter.spec.js > Character count > CC-09 a trailing line break is not counted
+22. [PASS] chromium > wordcounter.spec.js > Character count > CC-10 a tab is counted as 1 character
+23. [PASS] chromium > wordcounter.spec.js > Character count > CC-11 long text of 2499 characters (thousands separator)
+24. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-01 challenge sample: farmatodo 6, cuida 3, then a 2-count word
+25. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-02 no repetition: every word appears once
+26. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-03 words are case insensitive
+27. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-04 fewer than 3 distinct words lists only those
+28. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
+29. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-06 punctuation is not part of the word
+30. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-07 hyphenated words are kept as one keyword
+31. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-08 accented words are counted
+32. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-09 only the top 3 of 4 distinct words are listed
+33. [PASS] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-10 long text: one keyword at 500
+34. [FAIL] chromium > wordcounter.spec.js > Keyword density (top 3) > KD-11 KNOWN DEFECT BUG-03: numbers must appear as keywords
+35. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-01 challenge sample: 6/14 = 43%, 3/14 = 21%
+36. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-02 two words, 2/3 = 67% and 1/3 = 33%
+37. [PASS] chromium > wordcounter.spec.js > Keyword density percentages > KP-03 a single repeated word is 100%
+38. [PASS] chromium > wordcounter.spec.js > Live updates > LU-01 clearing the text resets counters and keywords
+39. [PASS] chromium > wordcounter.spec.js > Live updates > LU-02 typing key by key updates counters
+40. [PASS] chromium > wordcounter.spec.js > Live updates > LU-03 appending text updates counters and keywords
 
 Failures:
 1. chromium > wordcounter.spec.js > Keyword density (top 3) > KD-05 KNOWN DEFECT BUG-02: "luna" must appear with its count
@@ -35,3 +60,6 @@ Failures:
       ]
     Call Log:
     - Timeout 10000ms exceeded while waiting on the predicate
+2. chromium > wordcounter.spec.js > Keyword density (top 3) > KD-11 KNOWN DEFECT BUG-03: numbers must appear as keywords
+    Error: top-3 counts
+    Timeout 10000ms exceeded while waiting on the predicate

@@ -21,6 +21,15 @@ class WordCounterPage extends BasePage {
   async enterText(text) {
     await this.textBox.fill(text);
   }
+
+  /** Types at the end of the current text, key by key (exercises live updates). */
+  async appendText(text) {
+    await this.textBox.pressSequentially(text);
+  }
+
+  async clear() {
+    await this.textBox.fill('');
+  }
 }
 
 module.exports = { WordCounterPage };

@@ -31,7 +31,7 @@ reporters/summary-reporter.js        executed / passed / failed + error descript
 ```
 Scenarios are listed in `docs/ESCENARIOS.md`.
 
-One scenario (`KD-05`, known defect BUG-02) fails on purpose: it documents a real site defect.
+Two scenarios (`KD-05` BUG-02 and `KD-11` BUG-03) fail on purpose: they document real site defects.
 
 ## Word frequency counter (part 4)
 ```bash
