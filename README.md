@@ -2,11 +2,11 @@
 
 Suite de pruebas automatizadas con **Playwright + JavaScript** para https://wordcounter.net/, aplicando el patrón **Page Object Model**. El contador de frecuencia de palabras vive en su propio repositorio.
 
-| Parte de la prueba                    | Dónde está                                                                                             |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/`                                            |
-| 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                                                               |
-| Escenarios definidos                  | `docs/ESCENARIOS.md`                                                                                   |
+| Parte de la prueba                    | Dónde está                                                                                          |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| 1. Suite de pruebas automatizadas     | `tests/`, `pages/`, `fixtures/`, `test-data/`, `reporters/`                                         |
+| 2. Reporte de fallas y hallazgos      | `docs/REPORTE_FALLAS.md`                                                                            |
+| Escenarios definidos                  | `docs/ESCENARIOS.md`                                                                                |
 | 4. Contador de frecuencia de palabras | [Repositorio independiente](https://github.com/angelavalbuenaproyectos19/Prueba-Farmatodo-Contador) |
 
 ---
