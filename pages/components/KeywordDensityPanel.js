@@ -1,10 +1,11 @@
+const { parseNumber } = require('../../utils/number');
+
 // Componente: panel "Keyword Density".
 class KeywordDensityPanel {
   /** @param {import('@playwright/test').Page} page */
   constructor(page) {
-    this.items = page.locator('#kwd-accordion-data .list-group-item');
-    this.list = page.locator('#kwd-accordion-data');
     this.panel = page.locator('#kwd-density');
+    this.items = page.locator('#kwd-accordion-data .list-group-item');
   }
 
   async isEmpty() {
@@ -21,10 +22,9 @@ class KeywordDensityPanel {
       const word = (await item.locator('.word').innerText()).trim();
       const badge = (await item.locator('.badge').innerText()).trim(); // ej. "6 (43%)"
       // El sitio primero dibuja las filas con el contador vacío y lo llena ~1 s después (ver OPP-02): se omiten hasta que estén listas.
-      const m = badge.match(/(\d[\d,]*)\s*\((\d+)%\)/);
-      if (!m) continue;
-      const [, count, percent] = m;
-      out.push({ word, count: Number(count.replace(/,/g, '')), percent: Number(percent) });
+      const match = badge.match(/(\d[\d,]*)\s*\((\d+)%\)/);
+      if (!match) continue;
+      out.push({ word, count: parseNumber(match[1]), percent: Number(match[2]) });
     }
     return out;
   }

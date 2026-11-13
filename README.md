@@ -80,6 +80,12 @@ npx playwright test -g "OP-07"
 npx playwright test --ui
 ```
 
+### Pruebas unitarias del reporter
+
+```bash
+npm run test:unit
+```
+
 ### Ver el reporte HTML
 
 ```bash
@@ -99,14 +105,17 @@ Abre el reporte detallado de Playwright con pasos, capturas y trazas de las prue
 
 ```
 pages/BasePage.js                         clase base (página de Playwright y navegación)
-pages/WordCounterPage.js                  page object principal; compone los componentes
-pages/components/StatsPanel.js            contadores de palabras, caracteres y métricas extra
+pages/WordCounterPage.js                  page object principal; recibe sus componentes (inyectables)
+pages/components/StatsPanel.js            contadores; registro de métricas (nombre -> selector)
 pages/components/KeywordDensityPanel.js   lista de Keyword Density
-pages/components/OptionsPanel.js          menú de opciones (modal)
+pages/components/OptionsPanel.js          menú de opciones; registro de opciones (nombre -> acción)
 fixtures/index.js                         fixtures que entregan los page objects listos
+utils/number.js                           utilidades compartidas (conversión de números con separador de miles)
 test-data/                                datos de los escenarios (IDs, textos, valores esperados)
-tests/e2e/                                pruebas: solo aserciones, sin selectores
-reporters/summary-reporter.js             reporte resumen (ejecutados / aprobados / fallidos)
+tests/e2e/                                pruebas end to end: solo aserciones, sin selectores
+tests/unit/                               pruebas unitarias del reporter
+reporters/format-summary.js               formato puro del resumen (ejecutados / aprobados / fallidos)
+reporters/summary-reporter.js             reporter de Playwright: recolecta resultados y escribe el archivo
 docs/                                     escenarios y reporte de fallas
 contador-frecuencia/                      contador de frecuencia de palabras (independiente)
 ```
@@ -151,3 +160,10 @@ toda: 1
 | Pruebas con timeout o fallas intermitentes | Revisa tu conexión: el sitio se consulta en vivo. Reintenta con `npx playwright test --workers=1`. |
 | `npm run test:headed` falla en Windows | Usa el comando de PowerShell de la sección 3. |
 | Quiero empezar de cero | Borra `node_modules`, `test-results` y `playwright-report`, y repite la instalación. |
+
+## 8. Cómo extender el proyecto
+
+- **Nueva métrica del panel de contadores:** agrega una entrada (nombre -> selector) en `METRIC_SELECTORS` de `pages/components/StatsPanel.js`; las pruebas ya la leen con `app.stats.value('nombre')`.
+- **Nueva opción de Keyword Density:** agrega una entrada (nombre -> acción) en `keywordDensityOptions` de `pages/components/OptionsPanel.js` y úsala en los datos con `options: { nombre: valor }`.
+- **Nuevo escenario:** agrega un objeto en `test-data/` (id, título, texto y valores esperados); los specs lo recorren sin cambios.
+- **Nueva página o sección del sitio:** crea un page object que extienda `BasePage` y regístralo en `fixtures/index.js`.

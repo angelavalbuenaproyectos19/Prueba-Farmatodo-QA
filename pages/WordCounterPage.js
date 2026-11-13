@@ -5,13 +5,19 @@ const { OptionsPanel } = require('./components/OptionsPanel');
 
 // Page Object de https://wordcounter.net/ (configuración por defecto, sin modificar ajustes del sitio).
 class WordCounterPage extends BasePage {
-  /** @param {import('@playwright/test').Page} page */
-  constructor(page) {
+  /**
+   * Los componentes se pueden inyectar (útil para sustituirlos o simularlos); por defecto se crean aquí.
+   * @param {import('@playwright/test').Page} page
+   */
+  constructor(
+    page,
+    { stats = new StatsPanel(page), keywords = new KeywordDensityPanel(page), options = new OptionsPanel(page) } = {}
+  ) {
     super(page);
     this.textBox = page.locator('#box');
-    this.stats = new StatsPanel(page);
-    this.keywords = new KeywordDensityPanel(page);
-    this.options = new OptionsPanel(page);
+    this.stats = stats;
+    this.keywords = keywords;
+    this.options = options;
   }
 
   async goto() {

@@ -5,7 +5,7 @@ test.describe('Conteo de palabras', () => {
   for (const s of words) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       if (s.text) await app.enterText(s.text);
-      await expect.poll(() => app.stats.words()).toBe(s.expected);
+      await expect.poll(() => app.stats.value('words')).toBe(s.expected);
     });
   }
 });
@@ -14,7 +14,7 @@ test.describe('Conteo de caracteres', () => {
   for (const s of characters) {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       if (s.text) await app.enterText(s.text);
-      await expect.poll(() => app.stats.characters()).toBe(s.expected);
+      await expect.poll(() => app.stats.value('characters')).toBe(s.expected);
     });
   }
 });
@@ -45,25 +45,25 @@ test.describe('Porcentajes de Keyword Density', () => {
 test.describe('Actualizaciones en vivo', () => {
   test('LU-01 borrar el texto reinicia contadores y keywords', async ({ wordCounterPage: app }) => {
     await app.enterText('hola mundo hola');
-    await expect.poll(() => app.stats.words()).toBe(3);
+    await expect.poll(() => app.stats.value('words')).toBe(3);
     await app.clear();
-    await expect.poll(() => app.stats.words()).toBe(0);
-    await expect.poll(() => app.stats.characters()).toBe(0);
+    await expect.poll(() => app.stats.value('words')).toBe(0);
+    await expect.poll(() => app.stats.value('characters')).toBe(0);
     await expect.poll(() => app.keywords.isEmpty()).toBe(true);
   });
 
   test('LU-02 escribir tecla por tecla actualiza los contadores', async ({ wordCounterPage: app }) => {
     await app.appendText('hola mundo');
-    await expect.poll(() => app.stats.words()).toBe(2);
-    await expect.poll(() => app.stats.characters()).toBe(10);
+    await expect.poll(() => app.stats.value('words')).toBe(2);
+    await expect.poll(() => app.stats.value('characters')).toBe(10);
   });
 
   test('LU-03 agregar texto actualiza contadores y keywords', async ({ wordCounterPage: app }) => {
     await app.enterText('hola mundo');
-    await expect.poll(() => app.stats.words()).toBe(2);
+    await expect.poll(() => app.stats.value('words')).toBe(2);
     await app.appendText(' hola');
-    await expect.poll(() => app.stats.words()).toBe(3);
-    await expect.poll(() => app.stats.characters()).toBe(15);
+    await expect.poll(() => app.stats.value('words')).toBe(3);
+    await expect.poll(() => app.stats.value('characters')).toBe(15);
     await expect.poll(() => app.keywords.topCounts(3)).toEqual([2, 1]);
   });
 });

@@ -5,12 +5,12 @@ test.describe('Textos en español > Conteos', () => {
   for (const s of conteos) {
     test(`${s.id} palabras - ${s.title}`, async ({ wordCounterPage: app }) => {
       await app.enterText(s.text);
-      await expect.poll(() => app.stats.words()).toBe(s.words);
+      await expect.poll(() => app.stats.value('words')).toBe(s.words);
     });
 
     test(`${s.id} caracteres - ${s.title}`, async ({ wordCounterPage: app }) => {
       await app.enterText(s.text);
-      await expect.poll(() => app.stats.characters()).toBe(s.chars);
+      await expect.poll(() => app.stats.value('characters')).toBe(s.chars);
     });
   }
 });

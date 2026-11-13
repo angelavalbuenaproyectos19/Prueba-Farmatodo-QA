@@ -34,16 +34,8 @@ test.describe('Opciones > Details', () => {
     test(`${s.id} ${s.title}`, async ({ wordCounterPage: app }) => {
       await app.enterText(s.text);
       await app.options.toggleDetails(s.toggles);
-      const e = s.expected;
-      const read = {
-        charactersNoSpaces: () => app.stats.metric(app.stats.charactersNoSpaces),
-        uniqueWords: () => app.stats.metric(app.stats.uniqueWords),
-        lines: () => app.stats.metric(app.stats.lines),
-        words: () => app.stats.words(),
-        characters: () => app.stats.characters(),
-      };
-      for (const [name, value] of Object.entries(e)) {
-        await expect.poll(read[name], { message: name }).toBe(value);
+      for (const [metric, value] of Object.entries(s.expected)) {
+        await expect.poll(() => app.stats.value(metric), { message: metric }).toBe(value);
       }
     });
   }
@@ -51,7 +43,7 @@ test.describe('Opciones > Details', () => {
   test('OP-18 ocultar el contador Characters mantiene visible Words', async ({ wordCounterPage: app }) => {
     await app.enterText('hola mundo');
     await app.options.toggleDetails(['chk_character_count']);
-    await expect(app.stats.characterCount).toBeHidden();
-    await expect(app.stats.wordCount).toBeVisible();
+    await expect(app.stats.locator('characters')).toBeHidden();
+    await expect(app.stats.locator('words')).toBeVisible();
   });
 });

@@ -1,31 +1,35 @@
-// Componente: panel de contadores (palabras, caracteres). Expone valores, nunca aserciones.
+const { parseNumber } = require('../../utils/number');
+
+// Registro de métricas: para agregar una nueva basta con sumar una entrada (nombre -> selector).
+// Las métricas opcionales están ocultas por defecto; se activan en Options > Details.
+const METRIC_SELECTORS = {
+  words: '#word_count',
+  characters: '#character_count',
+  charactersNoSpaces: '#character_count_no_spaces',
+  uniqueWords: '#unique_word_count',
+  lines: '#lines_count',
+};
+
+// Componente: panel de contadores. Expone valores y localizadores, nunca aserciones.
 class StatsPanel {
   /** @param {import('@playwright/test').Page} page */
   constructor(page) {
-    this.wordCount = page.locator('#word_count');
-    this.characterCount = page.locator('#character_count');
-    // Métricas opcionales, ocultas por defecto; se activan en Options > Details.
-    this.charactersNoSpaces = page.locator('#character_count_no_spaces');
-    this.uniqueWords = page.locator('#unique_word_count');
-    this.lines = page.locator('#lines_count');
+    this.locators = Object.fromEntries(
+      Object.entries(METRIC_SELECTORS).map(([name, selector]) => [name, page.locator(selector)])
+    );
   }
 
-  // El sitio formatea los miles (ej. "2,499"), por eso se quitan los separadores antes de convertir a número.
-  static parse(text) {
-    return Number(text.trim().replace(/,/g, ''));
+  /** @param {keyof typeof METRIC_SELECTORS} name */
+  locator(name) {
+    const locator = this.locators[name];
+    if (!locator) throw new Error(`Métrica desconocida "${name}". Disponibles: ${Object.keys(this.locators).join(', ')}`);
+    return locator;
   }
 
-  async words() {
-    return StatsPanel.parse(await this.wordCount.innerText());
-  }
-
-  async metric(locator) {
-    return StatsPanel.parse(await locator.innerText());
-  }
-
-  async characters() {
-    return StatsPanel.parse(await this.characterCount.innerText());
+  /** Valor numérico actual de una métrica. */
+  async value(name) {
+    return parseNumber(await this.locator(name).innerText());
   }
 }
 
-module.exports = { StatsPanel };
+module.exports = { StatsPanel, METRIC_SELECTORS };
